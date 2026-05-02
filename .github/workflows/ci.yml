@@ -21,11 +21,11 @@ jobs:
           java-version: 25
           cache: sbt
 
+      - name: Compile
+        run: sbt compile
+
       - name: Format
         run: sbt scalafmtCheck
 
       - name: Lint
         run: sbt "scalafixAll --check"
-
-      - name: Compile
-        run: sbt compile
