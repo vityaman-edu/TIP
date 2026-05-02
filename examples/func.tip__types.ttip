@@ -1,0 +1,17 @@
+f(a,b): (int,int) -> int
+{
+return g(a,b);
+}
+
+g(a,b): (int,int) -> int
+{
+return (a + b);
+}
+
+main(): () -> int
+{
+var a: int,b: int;
+a = input;
+b = input;
+return f(a,b);
+}

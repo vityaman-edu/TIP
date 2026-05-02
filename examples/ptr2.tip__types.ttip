@@ -1,0 +1,13 @@
+doubleDeref(r): (⭡⭡int) -> int
+{
+return (*(*r));
+}
+
+main(): () -> int
+{
+var n: int,p: ⭡int,q: ⭡⭡int;
+n = 17;
+p = &n;
+q = &p;
+return doubleDeref(q);
+}

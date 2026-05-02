@@ -1,0 +1,7 @@
+main(): () -> int
+{
+var x: int,y: int;
+x = input;
+y = input;
+return (x / y);
+}

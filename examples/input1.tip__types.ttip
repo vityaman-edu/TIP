@@ -1,0 +1,6 @@
+test(): () -> int
+{
+var a: int;
+a = input;
+return a;
+}

@@ -1,0 +1,8 @@
+main(): () -> int
+{
+var n: {a:◇,b:◇,c:⭡{a:int,b:int,c:◇,d:◇},d:int},k: {a:int,b:int,c:◇,d:◇},r1: int;
+k = {a:1,b:2};
+n = {c:&k,d:4};
+r1 = (*n.c).a;
+return r1;
+}

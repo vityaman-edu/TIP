@@ -1,0 +1,9 @@
+main(): () -> int
+{
+var x: int,y: int,z: int;
+x = input;
+y = input;
+z = input;
+if ((x == 0)) if ((y == 0)) output z; else output x; 
+return y;
+}

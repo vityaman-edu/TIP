@@ -1,0 +1,9 @@
+foo(p): (x2) -> x1
+{
+return bar(p);
+}
+
+bar(q): (x2) -> x1
+{
+return foo(q);
+}

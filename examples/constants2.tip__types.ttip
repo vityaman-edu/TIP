@@ -1,0 +1,13 @@
+main(): () -> int
+{
+var x: int,y: int,z: int;
+x = 27;
+y = input;
+z = ((2 * x) + y);
+if ((0 > x)) {
+y = (z - 3);
+} else {
+y = 12;
+}
+return y;
+}

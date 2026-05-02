@@ -1,0 +1,11 @@
+poly(p): (⭡x1) -> x1
+{
+return (*p);
+}
+
+poly2(q): (⭡x2) -> x2
+{
+var n: (⭡x1) -> x1;
+n = poly;
+return (*q);
+}

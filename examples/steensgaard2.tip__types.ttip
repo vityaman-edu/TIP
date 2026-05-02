@@ -1,0 +1,13 @@
+main(): () -> int
+{
+var a: ⭡⭡x2,b: ⭡⭡x2,c: ⭡⭡⭡x2,d: ⭡⭡⭡⭡x2,e: ⭡⭡⭡x2,f: ⭡⭡x2,g: ⭡x2;
+*c = f;
+b = alloc null;
+c = &a;
+e = (*d);
+a = b;
+c = &b;
+d = &c;
+f = &g;
+return 0;
+}

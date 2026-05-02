@@ -1,0 +1,12 @@
+main(): () -> int
+{
+var x: int,y: int,z: x1;
+x = 42;
+y = 43;
+if (x) {
+output 0;
+} else {
+output 1;
+}
+return 4;
+}

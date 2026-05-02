@@ -1,0 +1,36 @@
+inc(i): (int) -> int
+{
+return (i + 1);
+}
+
+dec(j): (int) -> int
+{
+return (j - 1);
+}
+
+ide(k): (int) -> int
+{
+return k;
+}
+
+foo(n,f): (int,(int) -> int) -> int
+{
+var r: int;
+if ((n == 0)) {
+f = ide;
+} 
+r = f(n);
+return r;
+}
+
+main(): () -> int
+{
+var x: int,y: int;
+x = input;
+if ((x > 0)) {
+y = foo(x,inc);
+} else {
+y = foo(x,dec);
+}
+return y;
+}

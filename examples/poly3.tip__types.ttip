@@ -1,0 +1,9 @@
+poly(p): (⭡x1) -> x1
+{
+return (*p);
+}
+
+poly2(p): (⭡x2) -> x2
+{
+return (*p);
+}

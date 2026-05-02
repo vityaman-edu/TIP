@@ -1,0 +1,9 @@
+test(f,a): (⭡(x2) -> x1,x2) -> x1
+{
+return (*f)(a);
+}
+
+test2(g,b): (⭡(x4) -> x3,x4) -> x3
+{
+return (*g)(b);
+}

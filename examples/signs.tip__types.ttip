@@ -1,0 +1,28 @@
+fun(x): (x1) -> int
+{
+var y: int;
+var k: int;
+k = 8;
+y = 7;
+while ((k > y)) {
+k = (k - 1);
+}
+return 0;
+}
+
+main(): () -> int
+{
+var pos: int,neg: int,top: int,zero: int;
+var later: int;
+pos = (5 + 5);
+pos = (5 * 5);
+neg = (-5 - 5);
+neg = (-5 * 5);
+neg = (5 * -5);
+top = (5 - 5);
+top = (top * 5);
+zero = (top * 0);
+zero = (5 * zero);
+later = 7;
+return 0;
+}

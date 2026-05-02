@@ -1,0 +1,27 @@
+idf(a): (int) -> int
+{
+return a;
+}
+
+posf(b): (int) -> int
+{
+return b;
+}
+
+negf(c): (int) -> int
+{
+return c;
+}
+
+main(): () -> int
+{
+var pos: int,neg: int,top: int,zero: int;
+zero = 0;
+top = idf(5);
+top = idf(-4);
+pos = posf(5);
+pos = posf(7);
+neg = negf(-4);
+neg = negf(-8);
+return 0;
+}

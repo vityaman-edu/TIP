@@ -1,0 +1,27 @@
+f(): () -> int
+{
+var a: ⭡⭡⭡x2,b: ⭡⭡⭡x2,d: ⭡⭡x2,e: ⭡⭡x2,tmp: ⭡⭡x2;
+a = &d;
+b = &e;
+a = b;
+tmp = alloc null;
+*a = tmp;
+return 0;
+}
+
+main(): () -> int
+{
+var a: int,b: int,z: ⭡⭡int,w: ⭡int,x: ⭡int,y: ⭡int,tmp: ⭡int;
+z = &x;
+w = &a;
+a = 42;
+if ((a > b)) {
+tmp = &a;
+*z = tmp;
+y = &b;
+} else {
+x = &b;
+y = w;
+}
+return 0;
+}

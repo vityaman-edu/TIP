@@ -1,0 +1,26 @@
+double(v): (int) -> int
+{
+return (2 * v);
+}
+
+testme(x,y): (int,int) -> int
+{
+var z: int,res: int;
+res = 0;
+z = double(y);
+if ((z == x)) {
+if ((x > (y + 10))) {
+error 42;
+} 
+error 41;
+} 
+return res;
+}
+
+main(): () -> int
+{
+var ix: int,iy: int;
+ix = input;
+iy = input;
+return testme(ix,iy);
+}
