@@ -2,21 +2,23 @@
 """Golden testing framework for TIP language examples.
 
 Usage:
-  python3 test/golden.py           # check output matches golden .log files
-  python3 test/golden.py --update  # regenerate golden .log files
+  python3 test/golden.py           # check output matches golden files
+  python3 test/golden.py --update  # regenerate golden files
 """
 
 import difflib
 import re
+import shutil
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).parent.parent
 EXAMPLES_DIR = PROJECT_ROOT / "examples"
 
-# Analysis flags appended after the source file argument (e.g. ["-types", "-cfg"])
-FLAGS: list[str] = []
+# Analysis flags placed before the source file argument (e.g. ["-types", "-cfg"])
+FLAGS: list[str] = ["-types"]
 
 _ANSI = re.compile(r"\x1b(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
 
@@ -43,7 +45,8 @@ def _split_by_file(output: str) -> dict[str, list[str]]:
     buf: list[str] = []
 
     for line in output.splitlines():
-        m = re.match(r"\[info\] running tip\.Tip \./examples/(.+?)\.tip", line)
+        # Handles optional flags and trailing output-dir in the running line.
+        m = re.match(r"\[info\] running tip\.Tip .*\./examples/(.+?)\.tip", line)
         if m:
             if current is not None:
                 sections[current] = buf
@@ -62,39 +65,14 @@ def _has_total_time(lines: list[str]) -> bool:
     return any("Total time:" in line for line in lines)
 
 
-def _assert_or_update(f: Path, section: list[str], update: bool) -> str | None:
-    """Update the golden file or return an error message if it differs."""
-    log_path = f.with_suffix(".log")
-    actual = _log_text(section)
-
-    if update:
-        log_path.write_text(actual)
-        print(f"  updated {log_path.name}")
-        return None
-
-    if not log_path.exists():
-        return f"MISSING {f.name}: no golden file {log_path.name}"
-
-    expected = log_path.read_text()
-    if actual == expected:
-        return None
-
-    diff = "".join(
-        difflib.unified_diff(
-            expected.splitlines(keepends=True),
-            actual.splitlines(keepends=True),
-            fromfile=f"golden/{log_path.name}",
-            tofile=f"actual/{log_path.name}",
-        )
-    )
-    return f"DIFF {f.name}:\n{diff}"
-
-
 def _canonize(lines: list[str]) -> list[str]:
     """Filter to relevant lines and remove run-specific data."""
     out: list[str] = []
     for line in lines:
         if line.startswith("[info]"):
+            # Skip the absolute-path "written to" message from Output.output.
+            if re.match(r"\[info\] Results of .+ analysis of .+ written to ", line):
+                continue
             out.append(line)
         elif line.startswith("[error]"):
             content = line[len("[error]"):].strip()
@@ -128,9 +106,79 @@ def _log_text(lines: list[str]) -> str:
     return "\n".join(_canonize(lines)) + f"\n[exit] {_exit_code(lines)}\n"
 
 
+def _diff(golden: Path, actual: str) -> str | None:
+    expected = golden.read_text()
+    if actual == expected:
+        return None
+    return "".join(
+        difflib.unified_diff(
+            expected.splitlines(keepends=True),
+            actual.splitlines(keepends=True),
+            fromfile=f"golden/{golden.name}",
+            tofile=f"actual/{golden.name}",
+        )
+    )
+
+
+def _assert_or_update(
+    f: Path, section: list[str], update: bool, out_dir: Path
+) -> str | None:
+    """Update golden files or return the first error found."""
+    # .log
+    log_path = f.with_suffix(".log")
+    actual_log = _log_text(section)
+
+    if update:
+        log_path.write_text(actual_log)
+        print(f"  updated {log_path.name}")
+    else:
+        if not log_path.exists():
+            return f"MISSING {f.name}: no golden file {log_path.name}"
+        if d := _diff(log_path, actual_log):
+            return f"DIFF {log_path.name}:\n{d}"
+
+    # output files (e.g. __types.ttip, __cfg.dot)
+    for golden in sorted(EXAMPLES_DIR.glob(f"{f.name}__*")):
+        generated = out_dir / golden.name
+        if update:
+            # Tool already wrote to out_dir == EXAMPLES_DIR; just confirm.
+            print(f"  updated {golden.name}")
+        else:
+            if not generated.exists():
+                return f"MISSING {golden.name}: not generated in this run"
+            if d := _diff(golden, generated.read_text()):
+                return f"DIFF {golden.name}:\n{d}"
+
+    return None
+
+
+def _sbt_cmd(f: Path, out_dir: Path) -> str:
+    # Tip.scala requires: [flags…] source outdir
+    parts = ["runMain tip.Tip"] + FLAGS
+    parts.append(f"./{f.relative_to(PROJECT_ROOT)}")
+    parts.append(str(out_dir))
+    return " ".join(parts)
+
+
 def main() -> int:
     update = "--update" in sys.argv
     files = _tip_files()
+
+    tmp: str | None = None
+    if update:
+        out_dir = EXAMPLES_DIR
+    else:
+        tmp = tempfile.mkdtemp()
+        out_dir = Path(tmp)
+
+    try:
+        return _run(update, files, out_dir)
+    finally:
+        if tmp:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+
+def _run(update: bool, files: list[Path], out_dir: Path) -> int:
     pending_start = 0
     batch = 0
 
@@ -139,11 +187,7 @@ def main() -> int:
     while pending_start < len(files):
         pending = files[pending_start:]
         batch += 1
-        suffix = " ".join(FLAGS)
-        commands = ["compile"] + [
-            f"runMain tip.Tip ./{f.relative_to(PROJECT_ROOT)}" + (f" {suffix}" if suffix else "")
-            for f in pending
-        ]
+        commands = ["compile"] + [_sbt_cmd(f, out_dir) for f in pending]
 
         print(f"  batch {batch}: {len(pending)} file(s)...", end=" ", flush=True)
         output = _run_sbt(commands)
@@ -175,7 +219,7 @@ def main() -> int:
             print(f"ran {ran_until + 1}")
 
         for f in pending[: ran_until + 1]:
-            if err := _assert_or_update(f, sections[f.stem], update):
+            if err := _assert_or_update(f, sections[f.stem], update, out_dir):
                 print(err)
                 if not update:
                     print("Run `python3 test/golden.py --update` to regenerate.")
