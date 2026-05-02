@@ -334,7 +334,7 @@ abstract class Interpreter(program: AProgram)(implicit declData: DeclarationData
     * Takes an integer input from stdin.
     */
   protected def input(exp: AExpr, env: Env, store: Store): (EValue, Store) = {
-    print(s"Enter input: ")
+    print("Enter input: ")
     Console.flush()
     val line = scala.io.StdIn.readLine()
     if (line == null) {

@@ -70,11 +70,11 @@ class FlatLattice[X] extends Lattice {
     override def toString = el.toString
   }
 
-  final case object Top extends FlatElement {
+  case object Top extends FlatElement {
     override def toString = "Top"
   }
 
-  final case object Bot extends FlatElement {
+  case object Bot extends FlatElement {
     override def toString = "Bot"
   }
 

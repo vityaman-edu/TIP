@@ -42,20 +42,17 @@ class SteensgaardAnalysis(program: AProgram)(implicit declData: DeclarationData)
 
     log.verb(s"Visiting ${node.getClass.getSimpleName} at ${node.loc}")
     node match {
-      case AAssignStmt(id1: AIdentifier, alloc: AAlloc, _) => ??? //<--- Complete here
-      case AAssignStmt(id1: AIdentifier, AVarRef(id2: AIdentifier, _), _) => ??? //<--- Complete here
-      case AAssignStmt(id1: AIdentifier, id2: AIdentifier, _) => ??? //<--- Complete here
-      case AAssignStmt(id1: AIdentifier, AUnaryOp(DerefOp, id2: AIdentifier, _), _) => ??? //<--- Complete here
-      case AAssignStmt(ADerefWrite(id1: AIdentifier, _), id2: AIdentifier, _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, _: AAlloc, _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, AVarRef(_: AIdentifier, _), _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, _: AIdentifier, _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, AUnaryOp(DerefOp, _: AIdentifier, _), _) => ??? //<--- Complete here
+      case AAssignStmt(ADerefWrite(_: AIdentifier, _), _: AIdentifier, _) => ??? //<--- Complete here
       case _ => // ignore other kinds of nodes
     }
     visitChildren(node, ())
   }
 
-  private def unify(t1: Term[StTerm], t2: Term[StTerm]): Unit = {
-    log.verb(s"Generating constraint $t1 = $t2")
-    solver.unify(t1, t2) // note that unification cannot fail, because there is only one kind of term constructor and no constants
-  }
+  
 
   /**
     * @inheritdoc

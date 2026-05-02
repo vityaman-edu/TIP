@@ -84,7 +84,7 @@ class RunOption {
     */
   def check(): Boolean =
     if (source == null) {
-      Tip.log.error(s"Source file/directory missing")
+      Tip.log.error("Source file/directory missing")
       false
     } else
       true

@@ -124,7 +124,7 @@ class TipParser(val input: ParserInput) extends Parser with Comments {
     }.asInstanceOf[Rule1[AFieldAccess]]
 
   def Field: Rule1[ARecordField] = rule {
-    push(cursor) ~ Identifier ~ wspStr(":") ~ Expression ~> ((cur: Int, id: AIdentifier, expr: AExpr) => ARecordField(id.name, expr, id.loc))
+    push(cursor) ~ Identifier ~ wspStr(":") ~ Expression ~> ((_: Int, id: AIdentifier, expr: AExpr) => ARecordField(id.name, expr, id.loc))
   }
 
   def Operation: Rule1[AExpr] = rule {

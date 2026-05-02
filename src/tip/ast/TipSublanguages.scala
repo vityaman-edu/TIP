@@ -93,15 +93,15 @@ object NoPointers extends TipSublanguages {
   def visit(ast: AstNode, x: Unit): Unit = {
     ast match {
       case AUnaryOp(_: DerefOp.type, _, _) =>
-        LanguageRestrictionViolation(s"Pointer load operation is not allowed", ast.loc)
+        LanguageRestrictionViolation("Pointer load operation is not allowed", ast.loc)
       case AVarRef(_, _) =>
-        LanguageRestrictionViolation(s"Pointer reference operation is not allowed", ast.loc)
+        LanguageRestrictionViolation("Pointer reference operation is not allowed", ast.loc)
       case as: AAssignStmt =>
         as.left match {
           case _: ADerefWrite =>
-            LanguageRestrictionViolation(s"Pointer store operation is not allowed", ast.loc)
+            LanguageRestrictionViolation("Pointer store operation is not allowed", ast.loc)
           case _: AIndirectFieldWrite =>
-            LanguageRestrictionViolation(s"Pointer field store operation is not allowed", ast.loc)
+            LanguageRestrictionViolation("Pointer field store operation is not allowed", ast.loc)
           case _ =>
         }
       case _ =>
@@ -145,7 +145,7 @@ class NormalizedCalls(implicit declData: DeclarationData) extends TipSublanguage
         }
         if (args.exists(!_.isInstanceOf[AAtomicExpr]))
           LanguageRestrictionViolation(s"One of the arguments $args is not atomic", ast.loc)
-      case AAssignStmt(_: AIdentifier, ACallFuncExpr(targetFun, args, _), _) =>
+      case AAssignStmt(_: AIdentifier, ACallFuncExpr(targetFun, _, _), _) =>
         LanguageRestrictionViolation(s"Indirect call not allowed, $targetFun is not a function", ast.loc)
       case call: ACallFuncExpr => LanguageRestrictionViolation(s"Call $call outside an assignment is not allowed", ast.loc)
       case _ => visitChildren(ast, x)
@@ -160,15 +160,15 @@ object NoRecords extends TipSublanguages {
   def visit(ast: AstNode, x: Unit): Unit = {
     ast match {
       case _: ARecord =>
-        LanguageRestrictionViolation(s"Record is not allowed", ast.loc)
+        LanguageRestrictionViolation("Record is not allowed", ast.loc)
       case _: AFieldAccess =>
-        LanguageRestrictionViolation(s"Field read is not allowed", ast.loc)
+        LanguageRestrictionViolation("Field read is not allowed", ast.loc)
       case as: AAssignStmt =>
         as.left match {
           case _: ADirectFieldWrite =>
-            LanguageRestrictionViolation(s"Field write operation is not allowed", ast.loc)
+            LanguageRestrictionViolation("Field write operation is not allowed", ast.loc)
           case _: AIndirectFieldWrite =>
-            LanguageRestrictionViolation(s"Pointer field store operation is not allowed", ast.loc)
+            LanguageRestrictionViolation("Pointer field store operation is not allowed", ast.loc)
           case _ =>
         }
       case _ =>

@@ -70,10 +70,10 @@ trait ValueAnalysisMisc {
       case r: CfgStmtNode =>
         r.data match {
           // var declarations
-          case varr: AVarStmt => ??? //<--- Complete here
+          case _: AVarStmt => ??? //<--- Complete here
 
           // assignments
-          case AAssignStmt(id: AIdentifier, right, _) => ??? //<--- Complete here
+          case AAssignStmt(_: AIdentifier, _, _) => ??? //<--- Complete here
 
           // all others: like no-ops
           case _ => s
@@ -129,10 +129,10 @@ trait InterprocValueAnalysisFunctions extends MapLiftLatticeSolver[CfgNode] with
 
     n match {
       // function entry nodes
-      case funentry: CfgFunEntryNode => ??? //<--- Complete here
+      case _: CfgFunEntryNode => ??? //<--- Complete here
 
       // after-call nodes
-      case aftercall: CfgAfterCallNode => ??? //<--- Complete here
+      case _: CfgAfterCallNode => ??? //<--- Complete here
 
       // return node
       case CfgStmtNode(_, _, _, ret: AReturnStmt) =>

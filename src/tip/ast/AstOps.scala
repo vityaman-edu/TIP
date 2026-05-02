@@ -13,7 +13,7 @@ object AstOps {
   /**
     * Special 'result' variable, for function return values.
     */
-  val returnId = AIdentifierDeclaration(s"#result", Loc(0, 0))
+  val returnId = AIdentifierDeclaration("#result", Loc(0, 0))
 
   /**
     * An implicit class with convenience methods for collecting information in AST subtrees.

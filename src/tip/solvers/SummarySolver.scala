@@ -116,11 +116,11 @@ abstract class SummarySolver[D, L <: Lattice](val cfg: InterproceduralProgramCfg
   }
 
   def analyze(): Map[CfgNode, Map[D, valuelattice.Element]] = {
-    FixpointSolvers.log.verb(s"Summary pre-analysis")
+    FixpointSolvers.log.verb("Summary pre-analysis")
     val p1 = new Phase1(cfg)
     val res1 = p1.analyze()
     FixpointSolvers.log.verb(s"Result from pre-analysis:\n  ${res1.mkString("\n  ")}")
-    FixpointSolvers.log.verb(s"Main analysis")
+    FixpointSolvers.log.verb("Main analysis")
     val p2 = new Phase2(cfg, p1)
     val res2 = p2.analyze()
     FixpointSolvers.log.verb(s"Result from main analysis:\n  ${res2.mkString("\n  ")}")

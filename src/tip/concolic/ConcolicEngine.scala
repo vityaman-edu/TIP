@@ -36,7 +36,7 @@ class ConcolicEngine(val program: AProgram)(implicit declData: DeclarationData) 
         log.info(s"SMT script for next run: \n$smt")
         SMTSolver.solve(smt) match {
           case None =>
-            log.info(s"Path condition is unsatisfiable")
+            log.info("Path condition is unsatisfiable")
             targetNode.unsat(value)
             newInputs(symbols, lastNode, root)
           case Some(mapping) =>

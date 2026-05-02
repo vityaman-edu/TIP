@@ -46,11 +46,11 @@ class AndersenAnalysis(program: AProgram)(implicit declData: DeclarationData) ex
     implicit def allocToTarget(alloc: AAlloc): Alloc = Alloc(alloc)
 
     node match {
-      case AAssignStmt(id: AIdentifier, alloc: AAlloc, _) => ??? //<--- Complete here
-      case AAssignStmt(id1: AIdentifier, AVarRef(id2: AIdentifier, _), _) => ??? //<--- Complete here
-      case AAssignStmt(id1: AIdentifier, id2: AIdentifier, _) => ??? //<--- Complete here
-      case AAssignStmt(id1: AIdentifier, AUnaryOp(DerefOp, id2: AIdentifier, _), _) => ??? //<--- Complete here
-      case AAssignStmt(ADerefWrite(id1: AIdentifier, _), id2: AIdentifier, _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, _: AAlloc, _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, AVarRef(_: AIdentifier, _), _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, _: AIdentifier, _) => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, AUnaryOp(DerefOp, _: AIdentifier, _), _) => ??? //<--- Complete here
+      case AAssignStmt(ADerefWrite(_: AIdentifier, _), _: AIdentifier, _) => ??? //<--- Complete here
       case _ =>
     }
     visitChildren(node, ())

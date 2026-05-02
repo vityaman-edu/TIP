@@ -70,10 +70,10 @@ class ControlFlowAnalysis(program: AProgram)(implicit declData: DeclarationData)
     implicit def toVar(n: AstNode): AstVariable = AstVariable(n)
 
     node match {
-      case fun: AFunDeclaration => ??? //<--- Complete here
-      case AAssignStmt(id: AIdentifier, e, _) => ??? //<--- Complete here
-      case ACallFuncExpr(targetFun: AIdentifier, args, _) if decl(targetFun).isInstanceOf[AFunDeclaration] => ??? //<--- Complete here (or remove this case)
-      case ACallFuncExpr(targetFun, args, _) => ??? //<--- Complete here
+      case _: AFunDeclaration => ??? //<--- Complete here
+      case AAssignStmt(_: AIdentifier, _, _) => ??? //<--- Complete here
+      case ACallFuncExpr(targetFun: AIdentifier, _, _) if decl(targetFun).isInstanceOf[AFunDeclaration] => ??? //<--- Complete here (or remove this case)
+      case ACallFuncExpr(_, _, _) => ??? //<--- Complete here
       case _ =>
     }
     visitChildren(node, ())

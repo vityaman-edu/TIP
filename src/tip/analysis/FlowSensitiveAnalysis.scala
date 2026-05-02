@@ -23,12 +23,12 @@ object FlowSensitiveAnalysis {
           AnalysisOption.`summary` =>
         cfg match {
           case w: InterproceduralProgramCfg => Right(w)
-          case _ => throw new RuntimeException(s"Whole CFG needed")
+          case _ => throw new RuntimeException("Whole CFG needed")
         }
       case _ =>
         cfg match {
           case w: IntraproceduralProgramCfg => Left(w)
-          case _ => throw new RuntimeException(s"Intraprocedural CFG needed")
+          case _ => throw new RuntimeException("Intraprocedural CFG needed")
         }
     }
 

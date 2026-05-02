@@ -253,10 +253,10 @@ abstract class IDESolver[D, L <: Lattice](val cfg: InterproceduralProgramCfg)(im
   }
 
   def analyze(): Map[CfgNode, Map[D, valuelattice.Element]] = {
-    FixpointSolvers.log.verb(s"IDE phase 1")
+    FixpointSolvers.log.verb("IDE phase 1")
     val phase1 = new Phase1(cfg)
     phase1.analyze()
-    FixpointSolvers.log.verb(s"IDE phase 2")
+    FixpointSolvers.log.verb("IDE phase 2")
     val phase2 = new Phase2(cfg, phase1)
     phase2.restructure(phase2.analyze())
   }

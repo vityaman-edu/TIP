@@ -88,10 +88,10 @@ class SimpleSignAnalysis(cfg: ProgramCfg)(implicit declData: DeclarationData) ex
       case r: CfgStmtNode =>
         r.data match {
           // var declarations
-          case varr: AVarStmt => ??? //<--- Complete here
+          case _: AVarStmt => ??? //<--- Complete here
 
           // assignments
-          case AAssignStmt(id: AIdentifier, right, _) => ??? //<--- Complete here
+          case AAssignStmt(_: AIdentifier, _, _) => ??? //<--- Complete here
 
           // all others: like no-ops
           case _ => s

@@ -103,18 +103,18 @@ class TypeAnalysis(program: AProgram)(implicit declData: DeclarationData) extend
   def visit(node: AstNode, arg: Unit): Unit = {
     log.verb(s"Visiting ${node.getClass.getSimpleName} at ${node.loc}")
     node match {
-      case program: AProgram => ??? // <--- Complete here
+      case _: AProgram => ??? // <--- Complete here
       case _: ANumber => ??? // <--- Complete here
       case _: AInput => ??? // <--- Complete here
-      case is: AIfStmt => ??? // <--- Complete here
-      case os: AOutputStmt => ??? // <--- Complete here
-      case ws: AWhileStmt => ??? // <--- Complete here
+      case _: AIfStmt => ??? // <--- Complete here
+      case _: AOutputStmt => ??? // <--- Complete here
+      case _: AWhileStmt => ??? // <--- Complete here
       case as: AAssignStmt =>
         as.left match {
-          case id: AIdentifier => ??? // <--- Complete here
-          case dw: ADerefWrite => ??? // <--- Complete here
-          case dfw: ADirectFieldWrite => ??? // <--- Complete here
-          case ifw: AIndirectFieldWrite => ??? // <--- Complete here
+          case _: AIdentifier => ??? // <--- Complete here
+          case _: ADerefWrite => ??? // <--- Complete here
+          case _: ADirectFieldWrite => ??? // <--- Complete here
+          case _: AIndirectFieldWrite => ??? // <--- Complete here
         }
       case bin: ABinaryOp =>
         bin.operator match {
@@ -125,11 +125,11 @@ class TypeAnalysis(program: AProgram)(implicit declData: DeclarationData) extend
         un.operator match {
           case DerefOp => ??? // <--- Complete here
         }
-      case alloc: AAlloc => ??? // <--- Complete here
-      case ref: AVarRef => ??? // <--- Complete here
+      case _: AAlloc => ??? // <--- Complete here
+      case _: AVarRef => ??? // <--- Complete here
       case _: ANull => ??? // <--- Complete here
-      case fun: AFunDeclaration => ??? // <--- Complete here
-      case call: ACallFuncExpr => ??? // <--- Complete here
+      case _: AFunDeclaration => ??? // <--- Complete here
+      case _: ACallFuncExpr => ??? // <--- Complete here
       case _: AReturnStmt =>
       case rec: ARecord =>
         val fieldmap = rec.fields.foldLeft(Map[String, Term[Type]]()) { (a, b) =>
