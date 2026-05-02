@@ -3,6 +3,7 @@ package tip.analysis
 import tip.ast.AstNodeData._
 import tip.ast._
 import tip.solvers._
+import tip.types.TipTypeOps.makeFreshVar
 import tip.types._
 import tip.util.Log
 import tip.util.TipProgramException
@@ -10,7 +11,6 @@ import tip.util.TipProgramException
 import scala.collection.mutable
 
 import AstOps._
-import tip.types.TipTypeOps.makeFreshVar
 
 /**
   * Unification-based type analysis.
