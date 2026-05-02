@@ -1,0 +1,8 @@
+main(): () -> int
+{
+var a: ⭡x1,b: x2,x: x1,y: ⭡x1,z: x1,c: x3;
+a = &x;
+y = &z;
+y = &x;
+return 0;
+}

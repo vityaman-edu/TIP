@@ -1,0 +1,4 @@
+equal(a,b): (x1,x1) -> int
+{
+return (a == b);
+}

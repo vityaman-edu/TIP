@@ -1,0 +1,13 @@
+main(): () -> int
+{
+var a: ⭡x1,b: ⭡⭡x1,c: ⭡⭡x1,p: int,x: x1,y: ⭡x1,z: x1;
+a = &x;
+b = &y;
+if (p) {
+y = &z;
+} else {
+y = &x;
+}
+c = &y;
+return p;
+}

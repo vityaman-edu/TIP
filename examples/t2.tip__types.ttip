@@ -1,0 +1,13 @@
+foo(p): (μx2.((x2) -> x1) -> x1) -> x1
+{
+var f: (μx2.((x2) -> x1) -> x1) -> x1;
+f = foo;
+return bar(f);
+}
+
+bar(q): (μx3.((x3) -> x1) -> x1) -> x1
+{
+var g: μx2.((x2) -> x1) -> x1;
+g = bar;
+return foo(g);
+}

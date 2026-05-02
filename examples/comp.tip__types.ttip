@@ -1,0 +1,14 @@
+succ(i): (int) -> int
+{
+return (i + 1);
+}
+
+foo(p): ((int) -> int) -> int
+{
+return p(5);
+}
+
+main(): () -> int
+{
+return foo(succ);
+}

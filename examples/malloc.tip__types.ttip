@@ -1,0 +1,7 @@
+test(): () -> int
+{
+var p: μx2.⭡x2;
+p = alloc null;
+*p = p;
+return 0;
+}

@@ -1,0 +1,4 @@
+poly(p,q): (x2,x1) -> x1
+{
+return q;
+}

@@ -1,0 +1,6 @@
+test(p): (⭡x1) -> x1
+{
+var q: int;
+q = 3;
+return (*p);
+}

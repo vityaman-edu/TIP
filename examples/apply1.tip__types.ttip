@@ -1,0 +1,4 @@
+apply(f,a): ((x2) -> x1,x2) -> x1
+{
+return f(a);
+}

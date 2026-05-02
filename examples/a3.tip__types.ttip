@@ -1,0 +1,28 @@
+bar(x): (⭡int) -> ⭡int
+{
+return x;
+}
+
+foh(x,y): (int,int) -> int
+{
+return (x + y);
+}
+
+baz(x,y): (⭡⭡⭡int,⭡int) -> int
+{
+*y = foh(4,3);
+*y = ((*(*(*x))) * (*y));
+return (*y);
+}
+
+main(): () -> int
+{
+var foo: ⭡(⭡⭡⭡int,⭡int) -> int,x: ⭡⭡int,y: ⭡int,z: int,w: (⭡⭡⭡int,⭡int) -> int;
+w = baz;
+foo = &w;
+z = 8;
+y = &z;
+x = &y;
+*(*x) = (*foo)(&x,bar(alloc 0));
+return (*(*x));
+}

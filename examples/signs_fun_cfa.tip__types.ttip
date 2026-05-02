@@ -1,0 +1,24 @@
+posf(b): (int) -> int
+{
+return 5;
+}
+
+negf(c): (int) -> int
+{
+return -5;
+}
+
+main(): () -> int
+{
+var pos: int,neg: int,top: int,u: int,f: (int) -> int;
+u = 0;
+pos = posf(-4);
+neg = negf(3);
+if ((u > 0)) {
+f = posf;
+} else {
+f = negf;
+}
+top = f(4);
+return 0;
+}

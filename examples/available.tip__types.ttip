@@ -1,0 +1,11 @@
+main(): () -> int
+{
+var x: int,y: int,z: int,a: int,b: int;
+z = (a + b);
+y = (a * b);
+while ((y > (a + b))) {
+a = (a + 1);
+x = (a + b);
+}
+return a;
+}

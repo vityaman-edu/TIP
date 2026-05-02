@@ -1,0 +1,7 @@
+main(): () -> int
+{
+var n: {p:int,q:int},r1: int;
+n = {p:5,q:2};
+r1 = n.p;
+return r1;
+}

@@ -1,0 +1,9 @@
+foo(p): (μx2.((x2) -> x1) -> x1) -> x1
+{
+return bar(foo);
+}
+
+bar(q): μx2.((x2) -> x1) -> x1
+{
+return foo(bar);
+}

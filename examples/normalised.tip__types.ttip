@@ -1,0 +1,18 @@
+f(): () -> int
+{
+return 0;
+}
+
+g(): () -> int
+{
+var x: int;
+x = f();
+return x;
+}
+
+main(): () -> int
+{
+var u: int;
+u = g();
+return u;
+}

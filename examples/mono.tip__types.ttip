@@ -1,0 +1,13 @@
+foo(x,y): (int,int) -> int
+{
+x = (2 * y);
+return (x + 1);
+}
+
+main(): () -> int
+{
+var a: int,b: int;
+a = input;
+b = foo(a,17);
+return b;
+}

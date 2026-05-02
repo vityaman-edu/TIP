@@ -1,0 +1,9 @@
+main(): () -> x1
+{
+var s1: x1,s2: x1,s3: x1,p: ⭡x1,q: ⭡x1;
+p = &s1;
+p = &s2;
+q = &s3;
+q = p;
+return s1;
+}

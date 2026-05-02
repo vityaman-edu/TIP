@@ -1,0 +1,14 @@
+f(a,b): (int,int) -> int
+{
+return g(a,b);
+}
+
+g(a,b): (int,int) -> int
+{
+return (a + b);
+}
+
+main(): () -> int
+{
+return f(4,9);
+}

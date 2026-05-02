@@ -1,0 +1,26 @@
+foo(a): (int) -> int
+{
+return a;
+}
+
+bar(): () -> int
+{
+var x: int;
+x = foo(17);
+return x;
+}
+
+baz(): () -> int
+{
+var y: int;
+y = foo(18);
+return y;
+}
+
+main(): () -> int
+{
+var a: int,b: int;
+a = bar();
+b = baz();
+return (a + b);
+}

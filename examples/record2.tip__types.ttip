@@ -1,0 +1,8 @@
+main(): () -> int
+{
+var n: ⭡{p:int,q:int},r1: int;
+n = alloc {p:4,q:2};
+*n = {p:5,q:6};
+r1 = (*n).p;
+return r1;
+}

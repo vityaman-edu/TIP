@@ -1,0 +1,19 @@
+f(x): (int) -> int
+{
+var r: int;
+if ((x > 100)) {
+r = (x + -10);
+} else {
+r = f(f((x + 11)));
+}
+return r;
+}
+
+main(): () -> int
+{
+output f(17);
+output f(95);
+output f(150);
+output f(200);
+return 0;
+}

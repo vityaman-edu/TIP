@@ -1,0 +1,19 @@
+main(): () -> int
+{
+var x: μx6.⭡x6,y: μx7.⭡x7,n: int,p: ⭡μx6.⭡x6,q: ⭡μx7.⭡x7;
+x = alloc null;
+y = alloc null;
+*x = null;
+*y = y;
+n = input;
+while ((n > 0)) {
+p = alloc null;
+q = alloc null;
+*p = x;
+*q = y;
+x = p;
+y = q;
+n = (n - 1);
+}
+return 0;
+}

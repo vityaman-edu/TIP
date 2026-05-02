@@ -1,0 +1,7 @@
+main(): () -> int
+{
+var n: ⭡{a:◇,b:◇,c:{a:int,b:int,c:◇,d:◇},d:int},k: {a:int,b:int,c:◇,d:◇};
+k = {a:1,b:2};
+n = alloc {c:k,d:4};
+return (*n).c.b;
+}

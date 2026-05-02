@@ -1,0 +1,9 @@
+main(): () -> int
+{
+var x: int,pa: ⭡int,pb: ⭡int;
+x = 5;
+pa = &x;
+pb = pa;
+*pb = 2;
+return (x == 2);
+}

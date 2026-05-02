@@ -1,0 +1,34 @@
+bar(x): (⭡⭡x3) -> int
+{
+return 4;
+}
+
+unnormalized(): () -> int
+{
+var foo: ⭡(⭡⭡⭡x4,int) -> x4;
+var x: ⭡⭡x4;
+var d: ⭡x4;
+d = (*x);
+*d = (*foo)(&x,bar(alloc null));
+return 10;
+}
+
+normalized(): () -> int
+{
+var foo: ⭡(⭡⭡⭡x5,int) -> x5;
+var x: ⭡⭡x5;
+var a1: ⭡⭡⭡x5,a2: int;
+var m: ⭡⭡x3;
+var f1: (⭡⭡x3) -> int,f2: (⭡⭡⭡x5,int) -> x5;
+var d: ⭡x5;
+var r: x5;
+f1 = bar;
+f2 = (*foo);
+m = alloc null;
+a1 = &x;
+a2 = f1(m);
+d = (*x);
+r = f2(a1,a2);
+*d = r;
+return 10;
+}
