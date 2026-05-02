@@ -4,8 +4,10 @@ out/
 .settings
 .idea/
 /target
-/project
 .DS_Store
+
+/project
+!/project/plugins.sbt
 
 .metals
 .bloop
