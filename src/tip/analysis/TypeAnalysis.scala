@@ -10,6 +10,7 @@ import tip.util.TipProgramException
 import scala.collection.mutable
 
 import AstOps._
+import tip.types.TipTypeOps.makeFreshVar
 
 /**
   * Unification-based type analysis.
@@ -75,7 +76,7 @@ class TypeAnalysis(program: AProgram)(implicit declData: DeclarationData) extend
     // close the terms and create the TypeData
     new DepthFirstAstVisitor[Unit] {
       val sol: Map[Var[Type], Term[Type]] = solver.solution()
-      log.info(s"Solution (not yet closed):\n${sol.map { case (k, v) => s"  \u27E6$k\u27E7 = $v" }.mkString("\n")}")
+      log.debug(s"Solution (not yet closed):\n${sol.map { case (k, v) => s"  \u27E6$k\u27E7 = $v" }.mkString("\n")}")
       val freshvars: mutable.Map[Var[Type], Var[Type]] = mutable.Map()
       visit(program, ())
 
@@ -103,33 +104,60 @@ class TypeAnalysis(program: AProgram)(implicit declData: DeclarationData) extend
   def visit(node: AstNode, arg: Unit): Unit = {
     log.verb(s"Visiting ${node.getClass.getSimpleName} at ${node.loc}")
     node match {
-      case _: AProgram => ??? // <--- Complete here
-      case _: ANumber => ??? // <--- Complete here
-      case _: AInput => ??? // <--- Complete here
-      case _: AIfStmt => ??? // <--- Complete here
-      case _: AOutputStmt => ??? // <--- Complete here
-      case _: AWhileStmt => ??? // <--- Complete here
-      case as: AAssignStmt =>
-        as.left match {
-          case _: AIdentifier => ??? // <--- Complete here
-          case _: ADerefWrite => ??? // <--- Complete here
-          case _: ADirectFieldWrite => ??? // <--- Complete here
-          case _: AIndirectFieldWrite => ??? // <--- Complete here
+      case _: AProgram =>
+      case x: ANumber =>
+        unify(x, IntType())
+      case x: AInput =>
+        unify(x, IntType())
+      case x: AIfStmt =>
+        unify(x.guard, IntType())
+        unify(x, x.ifBranch)
+        x.elseBranch.foreach(y => unify(y, x))
+      case x: AOutputStmt =>
+        unify(x.exp, IntType())
+      case x: AWhileStmt =>
+        unify(x.guard, IntType())
+      case x: AAssignStmt =>
+        val rhsT: Term[Type] = x.right
+        x.left match {
+          case lhs: AIdentifier =>
+            unify(lhs, rhsT)
+          case lhs: ADerefWrite =>
+            unify(lhs.exp, PointerType(rhsT))
+          case lhs: ADirectFieldWrite =>
+            unify(lhs.id, RecordType(allFieldNames.map { f =>
+              if (f == lhs.field) rhsT else FreshVarType()
+            }))
+          case lhs: AIndirectFieldWrite =>
+            unify(lhs.exp, PointerType(RecordType(allFieldNames.map { f =>
+              if (f == lhs.field) rhsT else FreshVarType()
+            })))
         }
-      case bin: ABinaryOp =>
-        bin.operator match {
-          case Eqq => ??? // <--- Complete here
-          case _ => ??? // <--- Complete here
+      case x: ABinaryOp =>
+        x.operator match {
+          case Eqq =>
+            unify(x, IntType())
+            unify(x.left, x.right)
+          case _ =>
+            unify(x, IntType())
+            unify(x, x.left)
+            unify(x, x.right)
         }
-      case un: AUnaryOp =>
-        un.operator match {
-          case DerefOp => ??? // <--- Complete here
+      case x: AUnaryOp =>
+        x.operator match {
+          case DerefOp =>
+            unify(x.subexp, PointerType(x))
         }
-      case _: AAlloc => ??? // <--- Complete here
-      case _: AVarRef => ??? // <--- Complete here
-      case _: ANull => ??? // <--- Complete here
-      case _: AFunDeclaration => ??? // <--- Complete here
-      case _: ACallFuncExpr => ??? // <--- Complete here
+      case x: AAlloc =>
+        unify(x, PointerType(x.exp))
+      case x: AVarRef =>
+        unify(x, PointerType(x.id))
+      case x: ANull =>
+        unify(x, PointerType(makeFreshVar()))
+      case x: AFunDeclaration =>
+        unify(x, FunctionType(x.params, x.stmts.ret.exp))
+      case x: ACallFuncExpr =>
+        unify(x.targetFun, FunctionType(x.args, x))
       case _: AReturnStmt =>
       case rec: ARecord =>
         val fieldmap = rec.fields.foldLeft(Map[String, Term[Type]]()) { (a, b) =>
