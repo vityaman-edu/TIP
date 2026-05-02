@@ -1,6 +1,6 @@
 main() {
   var p;
-  p = alloc 0;
+  p = alloc null;
   *p = p;
   return p;
 }

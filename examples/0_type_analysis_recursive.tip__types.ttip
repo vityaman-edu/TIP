@@ -1,0 +1,7 @@
+main(): () -> μx2.⭡x2
+{
+var p: μx2.⭡x2;
+p = alloc null;
+*p = p;
+return p;
+}
