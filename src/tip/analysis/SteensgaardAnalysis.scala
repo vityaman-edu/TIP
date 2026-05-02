@@ -52,8 +52,6 @@ class SteensgaardAnalysis(program: AProgram)(implicit declData: DeclarationData)
     visitChildren(node, ())
   }
 
-  
-
   /**
     * @inheritdoc
     */

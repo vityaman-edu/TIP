@@ -27,10 +27,6 @@ trait IntervalAnalysisWidening extends ValueAnalysisMisc with Dependencies[CfgNo
 
   def loophead(n: CfgNode): Boolean = indep(n).exists(cfg.rank(_) > cfg.rank(n))
 
-  
-
-  
-
   def widenInterval(x: valuelattice.Element, y: valuelattice.Element): valuelattice.Element =
     (x, y) match {
       case (IntervalLattice.EmptyInterval, _) => y
