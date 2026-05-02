@@ -160,9 +160,20 @@ def _sbt_cmd(f: Path, out_dir: Path) -> str:
     return " ".join(parts)
 
 
+def _parse_filter() -> re.Pattern | None:
+    args = sys.argv[1:]
+    for i, arg in enumerate(args):
+        if arg == "--filter" and i + 1 < len(args):
+            return re.compile(args[i + 1])
+    return None
+
+
 def main() -> int:
     update = "--update" in sys.argv
+    filter_re = _parse_filter()
     files = _tip_files()
+    if filter_re:
+        files = [f for f in files if filter_re.search(f.stem)]
 
     tmp: str | None = None
     if update:

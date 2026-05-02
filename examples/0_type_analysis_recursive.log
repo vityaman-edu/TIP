@@ -1,0 +1,3 @@
+[info] Processing 0_type_analysis_recursive.tip
+[error] Type error: Cannot unify ⟦0[3:13]⟧ and ⟦p[2:7]⟧ (with representatives int and ⭡⟦p[2:7]⟧)
+[exit] 1
