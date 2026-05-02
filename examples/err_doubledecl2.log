@@ -1,0 +1,3 @@
+[info] Processing err_doubledecl2.tip
+[error] Symbol error: Redefinition of identifier x (line 2, column 5)
+[exit] 1

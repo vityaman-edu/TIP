@@ -1,0 +1,3 @@
+[info] Processing err_decl_use.tip
+[error] Symbol error: Identifier a not declared (line 2, column 14)
+[exit] 1
