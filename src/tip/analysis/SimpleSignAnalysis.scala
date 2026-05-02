@@ -1,10 +1,13 @@
 package tip.analysis
 
-import tip.cfg.CfgOps._
-import tip.cfg.{CfgNode, CfgStmtNode, ProgramCfg}
-import tip.lattices.{MapLattice, SignLattice}
 import tip.ast.AstNodeData.DeclarationData
 import tip.ast._
+import tip.cfg.CfgNode
+import tip.cfg.CfgOps._
+import tip.cfg.CfgStmtNode
+import tip.cfg.ProgramCfg
+import tip.lattices.MapLattice
+import tip.lattices.SignLattice
 import tip.solvers.FixpointSolvers
 
 import scala.collection.immutable.Set

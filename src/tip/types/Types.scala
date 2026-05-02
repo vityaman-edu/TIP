@@ -1,8 +1,9 @@
 package tip.types
 
+import tip.ast.AstNodeData._
 import tip.ast._
 import tip.solvers._
-import tip.ast.AstNodeData._
+
 import scala.language.implicitConversions
 
 object Type {

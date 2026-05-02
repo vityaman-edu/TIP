@@ -1,8 +1,9 @@
 package tip.ast
 
 import tip.ast.AstNodeData.DeclarationData
-import AstNodeData._
 import tip.util.TipProgramException
+
+import AstNodeData._
 
 /**
   * Defines restrictions of TIP for the different analyses.

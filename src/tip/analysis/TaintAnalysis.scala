@@ -1,7 +1,8 @@
 package tip.analysis
 
+import tip.ast.AstNodeData.AstNodeWithDeclaration
+import tip.ast.AstNodeData.DeclarationData
 import tip.ast._
-import tip.ast.AstNodeData.{AstNodeWithDeclaration, DeclarationData}
 import tip.cfg._
 import tip.lattices._
 import tip.solvers._

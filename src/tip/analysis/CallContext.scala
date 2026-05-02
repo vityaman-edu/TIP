@@ -1,6 +1,7 @@
 package tip.analysis
 
-import tip.cfg.{CfgCallNode, CfgFunEntryNode}
+import tip.cfg.CfgCallNode
+import tip.cfg.CfgFunEntryNode
 import tip.lattices.Lattice
 
 /**

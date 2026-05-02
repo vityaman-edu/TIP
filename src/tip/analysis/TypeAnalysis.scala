@@ -1,13 +1,15 @@
 package tip.analysis
 
+import tip.ast.AstNodeData._
 import tip.ast._
 import tip.solvers._
 import tip.types._
-import tip.ast.AstNodeData._
-import tip.util.{Log, TipProgramException}
-import AstOps._
+import tip.util.Log
+import tip.util.TipProgramException
 
 import scala.collection.mutable
+
+import AstOps._
 
 /**
   * Unification-based type analysis.

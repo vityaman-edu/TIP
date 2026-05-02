@@ -2,9 +2,12 @@ package tip.interpreter
 
 import tip.ast.AstNodeData._
 import tip.ast._
-import tip.util.{Log, TipProgramException}
+import tip.util.Log
+import tip.util.TipProgramException
 
-import scala.util.{Failure, Success, Try}
+import scala.util.Failure
+import scala.util.Success
+import scala.util.Try
 
 /**
   * Interpreter for TIP programs.

@@ -1,8 +1,9 @@
 package tip.concolic
 
-import tip.ast.AstNodeData._
 import tip.ast.AProgram
+import tip.ast.AstNodeData._
 import tip.util.Log
+
 import SMTSolver.Symbol
 
 class ConcolicEngine(val program: AProgram)(implicit declData: DeclarationData) extends SymbolicInterpreter(program) {

@@ -1,9 +1,13 @@
 package tip.solvers
 
-import tip.analysis.{FlowSensitiveAnalysis, ForwardDependencies}
+import tip.analysis.FlowSensitiveAnalysis
+import tip.analysis.ForwardDependencies
 import tip.ast.AstNodeData.DeclarationData
 import tip.cfg._
-import tip.lattices.{EdgeEnvLattice, Lattice, LiftLattice, MapLattice}
+import tip.lattices.EdgeEnvLattice
+import tip.lattices.Lattice
+import tip.lattices.LiftLattice
+import tip.lattices.MapLattice
 
 import scala.collection.immutable.Set
 

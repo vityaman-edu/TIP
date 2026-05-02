@@ -1,6 +1,7 @@
 package tip.analysis
 
-import tip.ast.{ADeclaration, AstNode}
+import tip.ast.ADeclaration
+import tip.ast.AstNode
 
 /**
   * Trait for program analyses.

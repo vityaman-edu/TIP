@@ -1,9 +1,12 @@
 package tip.analysis
 
-import tip.ast.{ADeclaration, DepthFirstAstVisitor, _}
+import tip.ast.ADeclaration
+import tip.ast.AstNodeData.DeclarationData
+import tip.ast.DepthFirstAstVisitor
+import tip.ast._
 import tip.solvers._
 import tip.util.Log
-import tip.ast.AstNodeData.DeclarationData
+
 import scala.language.implicitConversions
 
 class AndersenAnalysis(program: AProgram)(implicit declData: DeclarationData) extends DepthFirstAstVisitor[Unit] with PointsToAnalysis {

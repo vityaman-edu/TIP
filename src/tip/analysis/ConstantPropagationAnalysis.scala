@@ -1,7 +1,8 @@
 package tip.analysis
 
 import tip.ast.AstNodeData.DeclarationData
-import tip.cfg.{InterproceduralProgramCfg, IntraproceduralProgramCfg}
+import tip.cfg.InterproceduralProgramCfg
+import tip.cfg.IntraproceduralProgramCfg
 import tip.lattices.ConstantPropagationLattice
 
 object ConstantPropagationAnalysis {

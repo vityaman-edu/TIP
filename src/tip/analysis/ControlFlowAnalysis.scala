@@ -1,9 +1,15 @@
 package tip.analysis
 
-import tip.ast.{AAssignStmt, AIdentifier, AProgram, AstNode, DepthFirstAstVisitor, _}
+import tip.ast.AAssignStmt
+import tip.ast.AIdentifier
+import tip.ast.AProgram
+import tip.ast.AstNode
+import tip.ast.AstNodeData.AstNodeWithDeclaration
+import tip.ast.AstNodeData.DeclarationData
+import tip.ast.DepthFirstAstVisitor
+import tip.ast._
 import tip.solvers.SimpleCubicSolver
 import tip.util.Log
-import tip.ast.AstNodeData.{AstNodeWithDeclaration, DeclarationData}
 
 import scala.language.implicitConversions
 

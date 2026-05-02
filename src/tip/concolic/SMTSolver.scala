@@ -1,12 +1,12 @@
 package tip.concolic
 
-import tip.ast._
 import smtlib.Interpreter
 import smtlib.interpreters.Z3Interpreter
-import smtlib.parser.Parser
 import smtlib.parser.Commands._
 import smtlib.parser.CommandsResponses._
+import smtlib.parser.Parser
 import smtlib.parser.Terms._
+import tip.ast._
 import tip.util.Log
 
 object SMTSolver {

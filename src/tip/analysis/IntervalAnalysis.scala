@@ -1,7 +1,7 @@
 package tip.analysis
 
-import tip.cfg._
 import tip.ast.AstNodeData.DeclarationData
+import tip.cfg._
 import tip.lattices.IntervalLattice._
 import tip.lattices._
 import tip.solvers._

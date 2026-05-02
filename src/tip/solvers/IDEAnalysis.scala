@@ -1,7 +1,13 @@
 package tip.solvers
 
-import tip.cfg.{CfgAfterCallNode, CfgCallNode, CfgFunEntryNode, CfgFunExitNode, CfgNode, InterproceduralProgramCfg}
-import tip.lattices.{EdgeFunctionLattice, Lattice}
+import tip.cfg.CfgAfterCallNode
+import tip.cfg.CfgCallNode
+import tip.cfg.CfgFunEntryNode
+import tip.cfg.CfgFunExitNode
+import tip.cfg.CfgNode
+import tip.cfg.InterproceduralProgramCfg
+import tip.lattices.EdgeFunctionLattice
+import tip.lattices.Lattice
 
 /**
   * The special item representing the empty element in IDE.

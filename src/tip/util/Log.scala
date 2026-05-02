@@ -1,6 +1,7 @@
 package tip.util
 
 import scala.reflect.ClassTag
+
 import Log._
 
 /**

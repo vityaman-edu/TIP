@@ -1,7 +1,7 @@
 package tip.analysis
 
-import tip.cfg._
 import tip.ast.AstNodeData.DeclarationData
+import tip.cfg._
 
 /**
   * A flow-sensitive analysis.

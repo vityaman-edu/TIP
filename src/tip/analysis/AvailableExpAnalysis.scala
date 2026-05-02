@@ -1,10 +1,12 @@
 package tip.analysis
 
+import tip.ast.AstNodeData.DeclarationData
 import tip.ast._
 import tip.cfg._
-import tip.lattices.{MapLattice, ReversePowersetLattice}
-import tip.solvers.{SimpleMapLatticeFixpointSolver, SimpleWorklistFixpointSolver}
-import tip.ast.AstNodeData.DeclarationData
+import tip.lattices.MapLattice
+import tip.lattices.ReversePowersetLattice
+import tip.solvers.SimpleMapLatticeFixpointSolver
+import tip.solvers.SimpleWorklistFixpointSolver
 
 import scala.collection.immutable.Set
 

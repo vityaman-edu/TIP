@@ -1,6 +1,7 @@
 package tip.ast
 
-import tip.ast.AstNodeData.{AstNodeWithDeclaration, DeclarationData}
+import tip.ast.AstNodeData.AstNodeWithDeclaration
+import tip.ast.AstNodeData.DeclarationData
 
 import scala.collection.mutable
 

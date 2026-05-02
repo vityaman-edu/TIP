@@ -1,9 +1,11 @@
 package tip.util
 
-import java.io.{File, PrintWriter}
-
-import tip.analysis.{CallContext, FlowSensitiveAnalysis}
+import tip.analysis.CallContext
+import tip.analysis.FlowSensitiveAnalysis
 import tip.cfg._
+
+import java.io.File
+import java.io.PrintWriter
 
 /**
   * Basic outputting functionality.

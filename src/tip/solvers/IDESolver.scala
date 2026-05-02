@@ -1,12 +1,12 @@
 package tip.solvers
 
+import tip.analysis.FlowSensitiveAnalysis
+import tip.ast.AstNodeData.DeclarationData
 import tip.ast._
 import tip.cfg._
 import tip.lattices._
-import tip.analysis.FlowSensitiveAnalysis
 
 import scala.collection.mutable
-import tip.ast.AstNodeData.DeclarationData
 
 /**
   * (A variant of) the IDE analysis algorithm.

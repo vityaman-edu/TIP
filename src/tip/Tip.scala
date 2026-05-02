@@ -1,20 +1,23 @@
 package tip
 
-import java.io.{File, FileFilter}
-
 import org.parboiled2.ParseError
-import tip.analysis.FlowSensitiveAnalysis.{Analysis => dfa, AnalysisOption => dfo}
+import tip.analysis.FlowSensitiveAnalysis.{Analysis => dfa}
+import tip.analysis.FlowSensitiveAnalysis.{AnalysisOption => dfo}
 import tip.analysis._
+import tip.ast.AProgram
 import tip.ast.AstNodeData._
-import tip.ast.{AProgram, NoNormalizer}
-import tip.concolic.ConcolicEngine
+import tip.ast.NoNormalizer
 import tip.cfg._
+import tip.concolic.ConcolicEngine
 import tip.interpreter.ConcreteInterpreter
 import tip.parser.TipParser
 import tip.util._
 
+import java.io.File
+import java.io.FileFilter
 import scala.io.Source
-import scala.util.{Failure, Success}
+import scala.util.Failure
+import scala.util.Success
 
 /**
   * Options for running the TIP system.
