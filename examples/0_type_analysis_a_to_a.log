@@ -1,0 +1,3 @@
+[info] Processing 0_type_analysis_a_to_a.tip
+[error] Type error: Cannot unify ⟦42[14:14]⟧ and int (with representatives (⟦42[14:14]⟧) -> ⟦t(42)[14:10]⟧ and int)
+[exit] 1

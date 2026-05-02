@@ -1,0 +1,15 @@
+f(x) /* : a -> a */ {
+  return x;
+}
+
+g(y) /* : a -> a */ {
+  return f(y);
+}
+
+main() {
+  var t;
+  t = f;          /* : (a -> a)                    */
+  t = (f)(t);     /* : (a -> a)(a -> a) : (a -> a) */
+  t = (t)(g);     /* : (a -> a)(a -> a) : (a -> a) */
+  return (t)(42); /* : (a -> a)(int)    : int      */
+}

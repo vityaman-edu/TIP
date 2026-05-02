@@ -102,7 +102,6 @@ class TypeAnalysis(program: AProgram)(implicit declData: DeclarationData) extend
     * @param arg unused for this visitor
     */
   def visit(node: AstNode, arg: Unit): Unit = {
-    log.verb(s"Visiting ${node.getClass.getSimpleName} at ${node.loc}")
     node match {
       case _: AProgram =>
       case x: ANumber =>
