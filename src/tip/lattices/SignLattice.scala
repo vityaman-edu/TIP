@@ -14,7 +14,8 @@ object SignLattice extends FlatLattice[SignElement.Value] with LatticeWithOps {
 
   import SignElement._
 
-  private val signValues: Map[Element, Int] = Map(Bot -> 0, FlatEl(Zero) -> 1, FlatEl(Neg) -> 2, FlatEl(Pos) -> 3, Top -> 4)
+  private val signValues: Map[Element, Int] =
+    Map(Bot -> 0, FlatEl(Zero) -> 1, FlatEl(Neg) -> 2, FlatEl(Pos) -> 3, Top -> 4)
 
   private def lookup(op: List[List[Element]], x: Element, y: Element): Element =
     op(signValues(x))(signValues(y))
@@ -46,16 +47,16 @@ object SignLattice extends FlatLattice[SignElement.Value] with LatticeWithOps {
       List(Bot, Zero, Top, Top, Top)
     )
 
-  private val absDivide: List[List[Element]] =
-    List(
-      List(Bot, Bot, Bot, Bot, Bot),
-      List(Bot, Bot, Zero, Zero, Top),
-      List(Bot, Bot, Top, Top, Top),
-      List(Bot, Bot, Top, Top, Top),
-      List(Bot, Bot, Top, Top, Top)
-    )
+    private val absDivide: List[List[Element]] =
+      List(
+        List(Bot, Bot, Bot, Bot, Bot),
+        List(Bot, Bot, Zero, Zero, Top),
+        List(Bot, Bot, Top, Top, Top),
+        List(Bot, Bot, Top, Top, Top),
+        List(Bot, Bot, Top, Top, Top)
+      )
 
-  private val absGt: List[List[Element]] =
+    private val absGt: List[List[Element]] =
     List(
       List(Bot, Bot, Bot, Bot, Bot),
       List(Bot, Zero, Pos, Zero, Top),
