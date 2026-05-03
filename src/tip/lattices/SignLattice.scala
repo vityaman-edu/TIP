@@ -47,16 +47,16 @@ object SignLattice extends FlatLattice[SignElement.Value] with LatticeWithOps {
       List(Bot, Zero, Top, Top, Top)
     )
 
-    private val absDivide: List[List[Element]] =
-      List(
-        List(Bot, Bot, Bot, Bot, Bot),
-        List(Bot, Bot, Zero, Zero, Top),
-        List(Bot, Bot, Top, Top, Top),
-        List(Bot, Bot, Top, Top, Top),
-        List(Bot, Bot, Top, Top, Top)
-      )
+  private val absDivide: List[List[Element]] =
+    List(
+      List(Bot, Bot, Bot, Bot, Bot),
+      List(Bot, Bot, Zero, Zero, Top),
+      List(Bot, Bot, Top, Top, Top),
+      List(Bot, Bot, Top, Top, Top),
+      List(Bot, Bot, Top, Top, Top)
+    )
 
-    private val absGt: List[List[Element]] =
+  private val absGt: List[List[Element]] =
     List(
       List(Bot, Bot, Bot, Bot, Bot),
       List(Bot, Zero, Pos, Zero, Top),
