@@ -7,6 +7,7 @@ import tip.lattices._
 import tip.solvers._
 
 import scala.collection.immutable.Set
+import tip.ast.AstOps.AstOp
 
 /**
   * Base class for live variables analysis.
@@ -25,15 +26,15 @@ abstract class LiveVarsAnalysis(cfg: IntraproceduralProgramCfg)(implicit declDat
       case _: CfgFunExitNode => lattice.sublattice.bottom
       case r: CfgStmtNode =>
         r.data match {
-          case _: AExpr => ??? //<--- Complete here
+          case x: AExpr => s union x.appearingIds
           case as: AAssignStmt =>
             as.left match {
-              case _: AIdentifier => ??? //<--- Complete here
+              case x: AIdentifier => (s - x) union as.right.appearingIds
               case _ => ???
             }
-          case _: AVarStmt => ??? //<--- Complete here
-          case _: AReturnStmt => ??? //<--- Complete here
-          case _: AOutputStmt => ??? //<--- Complete here
+          case x: AVarStmt => s -- x.appearingIds
+          case x: AReturnStmt => s union x.exp.appearingIds
+          case x: AOutputStmt => s union x.exp.appearingIds
           case _ => s
         }
       case _ => s
