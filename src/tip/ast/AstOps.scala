@@ -172,6 +172,15 @@ object AstOps {
       expFinder.visit(n, ())
       fields.toSet
     }
+
+    def isAssignmentTo(id: AIdentifier)(implicit declData: DeclarationData): Boolean = n match {
+      case as: AAssignStmt =>
+        as.left match {
+          case x: AIdentifier => x.appearingIds == id.appearingIds
+          case _ => false
+        }
+      case _ => false
+    }
   }
 
   /**

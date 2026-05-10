@@ -160,6 +160,8 @@ class ReversePowersetLattice[A](s: Set[A]) extends Lattice {
 
   val bottom: Element = s
 
+  override def top: Element = Set.empty
+
   def lub(x: Element, y: Element): Element = x intersect y
 }
 

@@ -12,10 +12,11 @@ import tip.cfg.CfgFunExitNode
 import tip.cfg.CfgStmtNode
 import tip.ast.AAssignStmt
 import tip.ast.AIdentifier
+import tip.ast.AstNodeData.DeclarationData
 
 // May, Forward
-abstract class ReachingDefAnalysis(cfg: IntraproceduralProgramCfg) extends FlowSensitiveAnalysis(true) {
-  import ReachingDefAnalysis._
+abstract class ReachingDefAnalysis(cfg: IntraproceduralProgramCfg)(implicit declData: DeclarationData) extends FlowSensitiveAnalysis(true) {
+  import tip.ast.AstOps._
 
   val lattice: MapLattice[CfgNode, PowersetLattice[AAssignStmt]] = new MapLattice(new PowersetLattice())
 
@@ -40,22 +41,12 @@ abstract class ReachingDefAnalysis(cfg: IntraproceduralProgramCfg) extends FlowS
     }
 }
 
-object ReachingDefAnalysis {
-  implicit class AstOps(n: AAssignStmt) {
-    def isAssignmentTo(id: AIdentifier): Boolean =
-      n.left match {
-        case x: AIdentifier => x.name == id.name
-        case _ => false
-      }
-  }
-}
-
-class ReachingDefAnalysisSimpleSolver(cfg: IntraproceduralProgramCfg)
+class ReachingDefAnalysisSimpleSolver(cfg: IntraproceduralProgramCfg)(implicit declData: DeclarationData)
     extends ReachingDefAnalysis(cfg)
     with SimpleMapLatticeFixpointSolver[CfgNode]
     with ForwardDependencies
 
-class ReachingDefAnalysisWorklistSolver(cfg: IntraproceduralProgramCfg)
+class ReachingDefAnalysisWorklistSolver(cfg: IntraproceduralProgramCfg)(implicit declData: DeclarationData)
     extends ReachingDefAnalysis(cfg)
     with SimpleWorklistFixpointSolver[CfgNode]
     with ForwardDependencies
