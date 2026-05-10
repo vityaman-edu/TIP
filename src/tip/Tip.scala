@@ -234,8 +234,16 @@ object Tip extends App {
             if (options.variableSize) {
               val interval = (_: IntraproceduralProgramCfg, _: DeclarationData) => {
                 log.verb(s"Performing IntervalAnalysis")
+
                 val a = new IntervalAnalysis.Intraprocedural.WorklistSolverWithWideningAndNarrowing(wcfg)
-                a.analyze().asInstanceOf[Map[CfgNode, Map[ADeclaration, IntervalLattice.Element]]]
+
+                import a.liftedstatelattice._
+                a.analyze().map { case (n, lifted) =>
+                  n -> (lifted match {
+                    case Bottom => Map.empty[ADeclaration, IntervalLattice.Element]
+                    case Lift(m) => m
+                  })
+                }
               }
 
               log.verb("Starting VariableSizeAnalysis")
