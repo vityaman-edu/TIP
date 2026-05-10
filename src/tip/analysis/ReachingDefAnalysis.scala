@@ -1,18 +1,18 @@
 package tip.analysis
 
-import tip.cfg.IntraproceduralProgramCfg
-import tip.lattices.MapLattice
-import tip.lattices.PowersetLattice
-import tip.cfg.CfgNode
-import tip.ast.NoPointers
-import tip.ast.NoRecords
-import tip.solvers.SimpleMapLatticeFixpointSolver
-import tip.solvers.SimpleWorklistFixpointSolver
-import tip.cfg.CfgFunExitNode
-import tip.cfg.CfgStmtNode
 import tip.ast.AAssignStmt
 import tip.ast.AIdentifier
 import tip.ast.AstNodeData.DeclarationData
+import tip.ast.NoPointers
+import tip.ast.NoRecords
+import tip.cfg.CfgFunExitNode
+import tip.cfg.CfgNode
+import tip.cfg.CfgStmtNode
+import tip.cfg.IntraproceduralProgramCfg
+import tip.lattices.MapLattice
+import tip.lattices.PowersetLattice
+import tip.solvers.SimpleMapLatticeFixpointSolver
+import tip.solvers.SimpleWorklistFixpointSolver
 
 // May, Forward
 abstract class ReachingDefAnalysis(cfg: IntraproceduralProgramCfg)(implicit declData: DeclarationData) extends FlowSensitiveAnalysis(true) {

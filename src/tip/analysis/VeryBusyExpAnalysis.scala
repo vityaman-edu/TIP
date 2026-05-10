@@ -1,22 +1,22 @@
 package tip.analysis
 
-import tip.cfg.IntraproceduralProgramCfg
-import tip.ast.AstNodeData.DeclarationData
-import tip.solvers.SimpleMapLatticeFixpointSolver
-import tip.solvers.SimpleWorklistFixpointSolver
-import tip.cfg.CfgNode
-import tip.lattices.MapLattice
-import tip.ast.NoPointers
-import tip.ast.NoRecords
-import tip.lattices.ReversePowersetLattice
-import tip.ast.AExpr
-import tip.ast.AstOps.UnlabelledNode
-import tip.cfg.CfgFunExitNode
-import tip.cfg.CfgStmtNode
 import tip.ast.AAssignStmt
+import tip.ast.AExpr
 import tip.ast.AIdentifier
 import tip.ast.AOutputStmt
 import tip.ast.AReturnStmt
+import tip.ast.AstNodeData.DeclarationData
+import tip.ast.AstOps.UnlabelledNode
+import tip.ast.NoPointers
+import tip.ast.NoRecords
+import tip.cfg.CfgFunExitNode
+import tip.cfg.CfgNode
+import tip.cfg.CfgStmtNode
+import tip.cfg.IntraproceduralProgramCfg
+import tip.lattices.MapLattice
+import tip.lattices.ReversePowersetLattice
+import tip.solvers.SimpleMapLatticeFixpointSolver
+import tip.solvers.SimpleWorklistFixpointSolver
 
 abstract class VeryBusyExpAnalysis(cfg: IntraproceduralProgramCfg)(implicit declData: DeclarationData) extends FlowSensitiveAnalysis(false) {
   import tip.cfg.CfgOps._
