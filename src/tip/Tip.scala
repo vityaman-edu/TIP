@@ -18,6 +18,8 @@ import java.io.FileFilter
 import scala.io.Source
 import scala.util.Failure
 import scala.util.Success
+import tip.ast.ADeclaration
+import tip.lattices.IntervalLattice
 
 /**
   * Options for running the TIP system.
@@ -55,6 +57,11 @@ class RunOption {
   var steensgaard = false
 
   var dfAnalysis = Map[dfa.Value, dfo.Value]().withDefaultValue(dfo.Disabled)
+
+  /**
+    * If set, perform variable size analysis.
+    */
+  var variableSize = false
 
   /**
     * Source file, or directory containing .tip files.
@@ -112,6 +119,7 @@ object Tip extends App {
         | -cfa               enable control-flow analysis (interprocedural analyses use the call-graph obtained by this analysis)
         | -andersen          enable Andersen pointer analysis
         | -steensgaard       enable Steensgaard pointer analysis
+        | -variableSize      enable variable size analysis
         | -sign              enable sign analysis
         | -livevars          enable live variables analysis
         | -available         enable available expressions analysis
@@ -221,6 +229,19 @@ object Tip extends App {
                     Output.output(file, DataFlowOutput(s), wcfg.toDot(Output.labeler(res, an.stateAfterNode), Output.dotIder), options.out)
                   }
                 }
+            }
+
+            if (options.variableSize) {
+              val interval = (_: IntraproceduralProgramCfg, _: DeclarationData) => {
+                log.verb(s"Performing IntervalAnalysis")
+                val a = new IntervalAnalysis.Intraprocedural.WorklistSolverWithWideningAndNarrowing(wcfg)
+                a.analyze().asInstanceOf[Map[CfgNode, Map[ADeclaration, IntervalLattice.Element]]]
+              }
+
+              log.verb("Starting VariableSizeAnalysis")
+              val s = new VariableSizeAnalysis(wcfg, interval)
+              val types: Map[ADeclaration, TypeElement.Value] = s.analyze()
+              Output.output(file, OtherOutput(OutputKindE.types), types.toString(), options.out)
             }
           }
 
@@ -339,6 +360,8 @@ object Tip extends App {
           options.andersen = true
         case "-steensgaard" =>
           options.steensgaard = true
+        case "-variablesize" =>
+          options.variableSize = true
         case "-sign" | "-livevars" | "-available" | "-vbusy" | "-reaching" | "-constprop" | "-interval" | "-copyconstprop" | "-uninitvars" | "-taint" =>
           options.dfAnalysis += dfa.withName(args(i).drop(1)) -> {
             if (i + 1 < args.length && dfo.values.map(_.toString()).contains(args(i + 1))) {
