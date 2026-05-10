@@ -1,13 +1,13 @@
 package tip.analysis
 
 import tip.ast.AstNodeData.DeclarationData
+import tip.ast.AstOps.AstOp
 import tip.ast._
 import tip.cfg._
 import tip.lattices._
 import tip.solvers._
 
 import scala.collection.immutable.Set
-import tip.ast.AstOps.AstOp
 
 /**
   * Base class for live variables analysis.
